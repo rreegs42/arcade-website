@@ -1,0 +1,18 @@
+{
+    "name": "arcade-website",
+    "version": "1.0.0",
+    "description": "Arcade website for the arcade games",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "engines": {
+        "node": ">=18"
+    },
+    "dependencies": {
+        "express": "^4.21.0"
+    },
+    "devDependencies": {
+        "typescript": "^7.0.2"
+    }
+}
