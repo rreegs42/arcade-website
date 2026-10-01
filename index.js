@@ -4,6 +4,7 @@ import Bullet from "./Bullet.js"
 
 const canvas = document.getElementById("game");
 const context = canvas.getContext("2d");
+const startButton = document.querySelector("#start-button");
 
 canvas.width = 650;
 canvas.height = 650;
@@ -13,6 +14,7 @@ const player = new Player(canvas, 3);
 const enemy = new Enemy_Bee(canvas, canvas.width/2, canvas.height/2-20);
 const enemy2 = new Enemy_Bee(canvas, canvas.width/2+60, canvas.height/2-20);
 const enemy3 = new Enemy_Bee(canvas, canvas.width/2+120, canvas.height/2-20);
+let bullets = [];
 
 
 function game() {
@@ -22,6 +24,30 @@ function game() {
     enemy2.draw(context);
     enemy3.draw(context);
 
+    if (player.space) {
+        const bullet = new Bullet(canvas, 3);
+
+        bullet.x = player.x + player.width / 2 - bullet.width / 2;
+        bullet.y = player.y - bullet.height;
+        
+        bullets.push(bullet);
+        player.space = false;
+    }
+    
+    bullets.forEach(bullet => {
+        bullet.draw(context);
+    });
 }
 
-setInterval(game, 1000 / 60);
+//Prevents window from moving down when spacebar is pressed.
+window.addEventListener('keydown', function(e) {
+  if (e.key === ' ' || e.keyCode === 32) {
+    const target = e.target;
+
+    e.preventDefault();
+  }
+});
+
+startButton.addEventListener('click', (event) => {
+    setInterval(game, 1000 / 60);
+});
