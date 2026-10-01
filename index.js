@@ -11,9 +11,9 @@ canvas.height = 650;
 canvas.style.background = "black";
 
 const player = new Player(canvas, 3);
-const enemy = new Enemy_Bee(canvas, canvas.width/2, canvas.height/2-20);
-const enemy2 = new Enemy_Bee(canvas, canvas.width/2+60, canvas.height/2-20);
-const enemy3 = new Enemy_Bee(canvas, canvas.width/2+120, canvas.height/2-20);
+const enemy = new Enemy_Bee(canvas, canvas.width/2, canvas.height/2-20, player);
+//const enemy2 = new Enemy_Bee(canvas, canvas.width/2+60, canvas.height/2-20);
+//const enemy3 = new Enemy_Bee(canvas, canvas.width/2+120, canvas.height/2-20);
 let bullets = [];
 
 
@@ -21,8 +21,8 @@ function game() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     player.draw(context);
     enemy.draw(context);
-    enemy2.draw(context);
-    enemy3.draw(context);
+    //enemy2.draw(context);
+    //enemy3.draw(context);
 
     if (player.space) {
         const bullet = new Bullet(canvas, 3);
