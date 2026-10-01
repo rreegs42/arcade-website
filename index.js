@@ -7,10 +7,10 @@ canvas.width = 650;
 canvas.height = 650;
 canvas.style.background = "black";
 
-//const player = new Player(canvas, 3);
+const player = new Player(canvas, 3);
 
 function game() {
-    //player.draw(context);
+    player.draw(context);
 }
 
-//setInterval(game, 1000 / 60);
+setInterval(game, 1000 / 60);
