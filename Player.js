@@ -1,6 +1,9 @@
+import Bullet from "./Bullet.js"
+
 export default class Player {
     right = false;
     left = false;
+    space = false;
 
     constructor(canvas, velocity) {
         this.canvas = canvas;
@@ -18,7 +21,6 @@ export default class Player {
     draw(context) {
         this.move();
         this.collideWalls();
-        context.beginPath();
         context.fillStyle = "purple";
         context.fillRect(this.x, this.y, this.width, this.height);
     }
@@ -50,6 +52,9 @@ export default class Player {
             this.left = true;
             console.log(this.x, ", ", this.y);
         }
+        if (event.code == "Space") {
+            this.space = true;
+        }
     }
 
     keyup = event => {
@@ -58,6 +63,9 @@ export default class Player {
         }
         if (event.code == "ArrowLeft") {
             this.left = false;
+        }
+        if (event.code == "Space") {
+            this.space = false;
         }
     }
 }
