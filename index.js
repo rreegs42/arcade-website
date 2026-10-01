@@ -1,5 +1,6 @@
 import Player from "./Player.js";
 import Enemy_Bee from "./Enemy_Bee.js";
+import Bullet from "./Bullet.js"
 
 const canvas = document.getElementById("game");
 const context = canvas.getContext("2d");
