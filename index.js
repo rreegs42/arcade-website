@@ -10,6 +10,7 @@ canvas.style.background = "black";
 const player = new Player(canvas, 3);
 
 function game() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
     player.draw(context);
 }
 

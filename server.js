@@ -30,6 +30,10 @@ app.use(
   })
 );
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // A missing .js/.css/.mp3 should fail loudly as a plain 404, not come back as HTML.
 app.use((req, res) => {
   res.status(404).type("text/plain").send(`Not found: ${req.path}`);

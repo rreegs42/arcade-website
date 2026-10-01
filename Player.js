@@ -7,7 +7,7 @@ export default class Player {
         this.velocity = velocity;
 
         this.x = this.canvas.width / 2;
-        this.y = this.canvas.height - 75;
+        this.y = this.canvas.height - 50;
         this.width = 50;
         this.height = 50;
 
@@ -44,7 +44,7 @@ export default class Player {
         if (event.code == "ArrowRight") {
             this.right = true;
         }
-        if (event.code == "LeftRight") {
+        if (event.code == "ArrowLeft") {
             this.left = true;
         }
     }
@@ -53,7 +53,7 @@ export default class Player {
         if (event.code == "ArrowRight") {
             this.right = false;
         }
-        if (event.code == "LeftRight") {
+        if (event.code == "ArrowLeft") {
             this.left = false;
         }
     }
