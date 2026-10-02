@@ -1,0 +1,50 @@
+canvas {
+    border: 5px solid white;
+}
+
+h1 {
+    margin: 0px;
+    margin-bottom: 10px;
+    font-size: 3.0em;
+    font-family: "Helvetica";
+}
+
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px;
+    margin: 0px;
+    background-color: lightblue;
+}
+
+#buttons {
+    display: flex;
+    gap: 25px;   
+}
+
+#start-button {
+    color: white;
+    background-color: blue;
+    width: 100px;
+    height: 100px;
+    font-size: 20px;
+    border: 3px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#reset-button {
+    color: white;
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    font-size: 20px;
+    border: 3px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#score {
+    font-size: 50px;
+}

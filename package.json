@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "Arcade website for the arcade games",
     "main": "server.js",
+    "type": "module",
     "scripts": {
         "start": "node server.js"
     },
