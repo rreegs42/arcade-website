@@ -11,7 +11,7 @@ export default class Bullet {
 
     draw(context) {
         this.y -= this.bVelocity;
-        context.fillStyle = "green";
+        context.fillStyle = "yellow";
         context.fillRect(this.x, this.y, this.width, this.height);
     }
 }
