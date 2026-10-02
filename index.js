@@ -12,7 +12,7 @@ canvas.width = 650;
 canvas.height = 650;
 canvas.style.background = "black";
 
-const player = new Player(canvas, 3);
+const player = new Player(canvas, 4.5);
 const enemy1 = new Enemy_Bee(canvas, canvas.width/2, canvas.height/2-20, player);
 const enemy2 = new Enemy_Bee(canvas, canvas.width/2-120, canvas.height/2-40, player);
 //const enemy3 = new Enemy_Bee(canvas, canvas.width/2+120, canvas.height/2-20);
@@ -75,11 +75,6 @@ function game() {
     });
 }
 
-
-//check bullet collisions with enemies
-function check_enemy_hit(bullet){
-
-}
 
 //check collisions between rectangles
 function is_collision(obj1, obj2){

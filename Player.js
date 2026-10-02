@@ -9,10 +9,11 @@ export default class Player {
         this.canvas = canvas;
         this.velocity = velocity;
 
-        this.x = this.canvas.width / 2;
-        this.y = this.canvas.height - 50;
         this.width = 50;
         this.height = 50;
+
+        this.x = this.canvas.width / 2;
+        this.y = this.canvas.height - this.width * 2;
 
         document.addEventListener("keydown", this.keydown);
         document.addEventListener("keyup", this.keyup);
