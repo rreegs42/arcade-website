@@ -46,11 +46,11 @@ export default class Player {
     keydown = event => {
         if (event.code == "ArrowRight") {
             this.right = true;
-            console.log(this.x, ", ", this.y);
+            //console.log(this.x, ", ", this.y);
         }
         if (event.code == "ArrowLeft") {
             this.left = true;
-            console.log(this.x, ", ", this.y);
+            //console.log(this.x, ", ", this.y);
         }
         if (event.code == "Space") {
             this.space = true;

@@ -5,7 +5,7 @@ export default class Bullet {
 
         this.x = 0;
         this.y = 0;
-        this.width = 25;
+        this.width = 10;
         this.height = 25;
     }
 
