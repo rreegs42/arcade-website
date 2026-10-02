@@ -13,16 +13,18 @@ canvas.height = 650;
 canvas.style.background = "black";
 
 const player = new Player(canvas, 3);
-const enemy = new Enemy_Bee(canvas, canvas.width/2, canvas.height/2-20, player);
+const enemy1 = new Enemy_Bee(canvas, canvas.width/2, canvas.height/2-20, player);
 //const enemy2 = new Enemy_Bee(canvas, canvas.width/2+60, canvas.height/2-20);
 //const enemy3 = new Enemy_Bee(canvas, canvas.width/2+120, canvas.height/2-20);
 let bullets = [];
+let enemies = [];
 
+enemies.push(enemy1);
 
 function game() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     player.draw(context);
-    enemy.draw(context);
+    //enemy.draw(context);
     //enemy2.draw(context);
     //enemy3.draw(context);
 
@@ -47,18 +49,51 @@ function game() {
     if (cooldown > 0){
         cooldown -= 1;
     }
-    let count = 0;
+
+    enemies.forEach(enemy => {
+        enemy.draw(context);
+    });
+
+    let bullet_count = 0;
     bullets.forEach(bullet => {
         if(bullet.y < -(bullet.height*2)){
-            bullets.splice(count, 1);
-            count--;
+            bullets.splice(bullet_count, 1);
+            bullet_count--;
         } else {
+            let enemy_count = 0;
+            enemies.forEach(enemy => {
+                if(is_collision(bullet, enemy)){
+                    bullets.splice(bullet_count, 1);
+                    bullet_count--;
+                    enemies.splice(enemy_count, 1);
+                    enemy_count--;
+                } else {
+                    enemy_count++;
+                }
+            })
             bullet.draw(context);
         }
-        count++
+        bullet_count++
     });
-    console.log(count);
 }
+
+
+//check bullet collisions with enemies
+function check_enemy_hit(bullet){
+
+}
+
+//check collisions between rectangles
+function is_collision(obj1, obj2){
+    return(
+        obj1.x < obj2.x + obj2.width &&
+        obj1.x + obj1.width > obj2.x &&
+        obj1.y < obj2.y + obj2.height &&
+        obj1.y + obj1.height > obj2.y
+    );
+}
+
+
 
 //Prevents window from moving down when spacebar is pressed.
 window.addEventListener('keydown', function(e) {
