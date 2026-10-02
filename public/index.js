@@ -117,7 +117,8 @@ function resetGame() {
     cooldown = COOLDOWN_TIME;
 
     playerScore = 0;
-    updateScore(playerScore);
+    const scoreLabel = document.querySelector("#score");
+    scoreLabel.textContent = playerScore;
 
     player.x = canvas.width / 2;
     player.y = canvas.height - 50;
