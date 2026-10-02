@@ -11,7 +11,7 @@ let cooldown = COOLDOWN_TIME;
 
 canvas.width = 650;
 canvas.height = 650;
-canvas.style.background = "black";
+canvas.style.background = "darkslategrey";
 
 const player = new Player(canvas, 4.5);
 const enemy1 = new Enemy_Bee(canvas, canvas.width/2, canvas.height/2-20, player);
