@@ -22,7 +22,7 @@ export default class Player {
     draw(context) {
         this.move();
         this.collideWalls();
-        context.fillStyle = "purple";
+        context.fillStyle = "blue";
         context.fillRect(this.x, this.y, this.width, this.height);
     }
 
