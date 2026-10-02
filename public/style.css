@@ -1,12 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Ink:wght@100..900&family=Honk:MORF@15&family=Isometra&family=Jersey+10&display=swap');
+
 canvas {
     border: 5px solid white;
+    border-radius: 15px;
 }
 
 h1 {
     margin: 0px;
-    margin-bottom: 10px;
-    font-size: 3.0em;
-    font-family: "Helvetica";
+    font-size: 4.0em;
+    font-family: "Honk", system-ui;
 }
 
 body {
@@ -15,36 +17,49 @@ body {
     flex-direction: column;
     padding: 0px;
     margin: 0px;
-    background-color: lightblue;
+    background-color: black;
 }
 
-#buttons {
+#control-board {
     display: flex;
     gap: 25px;   
 }
 
 #start-button {
+    font-family: "Jersey 10", sans-serif;
     color: white;
     background-color: blue;
-    width: 100px;
-    height: 100px;
-    font-size: 20px;
-    border: 3px solid black;
+    width: 125px;
+    height: 125px;
+    font-size: 30px;
+    border: 15px solid darkblue;
     border-radius: 50%;
     cursor: pointer;
 }
 
 #reset-button {
+    font-family: "Jersey 10", sans-serif;
     color: white;
     background-color: red;
-    width: 100px;
-    height: 100px;
-    font-size: 20px;
-    border: 3px solid black;
+    width: 125px;
+    height: 125px;
+    font-size: 30px;
+    border: 15px solid darkred;
     border-radius: 50%;
     cursor: pointer;
 }
 
 #score {
-    font-size: 50px;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 75px;
+    color: white;
+}
+
+#control-text {
+    font-family: "Jersey 10", sans-serif;
+    font-size: 30px;
+    color: white;
+    background-color: darkslateblue;
+    border-radius: 5px;
+    padding: 10px;
 }
