@@ -5,6 +5,7 @@ import Bullet from "./Bullet.js"
 const canvas = document.getElementById("game");
 const context = canvas.getContext("2d");
 const startButton = document.querySelector("#start-button");
+const resetButton = document.querySelector("#reset-button");
 const COOLDOWN_TIME = 5;
 let cooldown = COOLDOWN_TIME;
 
@@ -100,3 +101,23 @@ window.addEventListener('keydown', function(e) {
 startButton.addEventListener('click', (event) => {
     setInterval(game, 1000 / 60);
 });
+resetButton.addEventListener('click', (event) => {
+    resetGame();
+});
+
+function resetGame() {
+    bullets = [];
+    enemies = [];
+
+    enemies.push(
+        new Enemy_Bee(canvas, canvas.width/2, canvas.height/2-20, player)
+    );
+    enemies.push (
+        new Enemy_Bee(canvas, canvas.width/2-120, canvas.height/2-40, player)
+    );
+
+    cooldown = COOLDOWN_TIME;
+
+    player.x = canvas.width / 2;
+    player.y = canvas.height - 50;
+}
