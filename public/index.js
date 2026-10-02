@@ -8,9 +8,10 @@ const startButton = document.querySelector("#start-button");
 const resetButton = document.querySelector("#reset-button");
 const COOLDOWN_TIME = 5;
 let cooldown = COOLDOWN_TIME;
+let playerScore = 0;
 
-canvas.width = 650;
-canvas.height = 650;
+canvas.width = 450;
+canvas.height = 550;
 canvas.style.background = "darkslategrey";
 
 const player = new Player(canvas, 4.5);
@@ -76,7 +77,6 @@ function game() {
     });
 }
 
-
 //check collisions between rectangles
 function is_collision(obj1, obj2){
     return(
@@ -86,8 +86,6 @@ function is_collision(obj1, obj2){
         obj1.y + obj1.height > obj2.y
     );
 }
-
-
 
 //Prevents window from moving down when spacebar is pressed.
 window.addEventListener('keydown', function(e) {
@@ -118,6 +116,21 @@ function resetGame() {
 
     cooldown = COOLDOWN_TIME;
 
+    playerScore = 0;
+    updateScore(playerScore);
+
     player.x = canvas.width / 2;
     player.y = canvas.height - 50;
+}
+
+function updateScore(enemy) {
+    if (enemy.diving_at_player) {
+        playerScore += 20;
+    }
+    else {
+        playerScore += 10;
+    }
+
+    const scoreLabel = document.querySelector("#score");
+    scoreLabel.textContent = playerScore;
 }
