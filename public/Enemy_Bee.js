@@ -35,8 +35,10 @@ export default class Enemy_Bee {
 
     draw(context) {
         context.beginPath();
-        context.fillStyle = "red";
-        context.fillRect(this.x, this.y, this.width, this.height);
+
+        const enemyImage = new Image();
+        enemyImage.src = "Sprites/galaxy_bee_0.png";
+        context.drawImage(enemyImage, this.x, this.y, this.width, this.height);
 
         if (this.at_home){
             this.checkPos();
