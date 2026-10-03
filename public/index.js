@@ -67,6 +67,7 @@ function game() {
                     bullet_count--;
                     enemies.splice(enemy_count, 1);
                     enemy_count--;
+                    updateScore(enemy);
                 } else {
                     enemy_count++;
                 }
