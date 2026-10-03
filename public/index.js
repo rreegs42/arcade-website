@@ -9,10 +9,26 @@ const resetButton = document.querySelector("#reset-button");
 const COOLDOWN_TIME = 5;
 let cooldown = COOLDOWN_TIME;
 let playerScore = 0;
+let gameStarted = false;
 
 canvas.width = 450;
 canvas.height = 550;
-canvas.style.background = "darkslategrey";
+
+const background = new Image();
+background.src = "Sprites/galaxy_background.png";
+background.onload = function() {
+    context.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+    context.font = "bold 40px Ariel";
+    context.fillStyle = "lightslateblue";
+    context.strokeStyle = "darkslateblue";
+    context.lineWidth = 3;
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+
+    context.fillText("PRESS START", canvas.width / 2, canvas.height / 2);
+    context.strokeText("PRESS START", canvas.width / 2, canvas.height / 2);
+}
 
 const player = new Player(canvas, 4.5);
 const enemy1 = new Enemy_Bee(canvas, canvas.width/2, canvas.height/2-20, player);
@@ -26,6 +42,7 @@ enemies.push(enemy2);
 
 function game() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(background, 0, 0, canvas.width, canvas.height);
     player.draw(context);
 
     window.addEventListener("keydown", (event) => {
@@ -98,6 +115,7 @@ window.addEventListener('keydown', function(e) {
 });
 
 startButton.addEventListener('click', (event) => {
+    gameStarted = true;
     setInterval(game, 1000 / 60);
 });
 resetButton.addEventListener('click', (event) => {
