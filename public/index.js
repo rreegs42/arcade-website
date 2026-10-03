@@ -140,7 +140,7 @@ function resetGame() {
     scoreLabel.textContent = playerScore;
 
     player.x = canvas.width / 2;
-    player.y = canvas.height - 50;
+    player.y = this.canvas.height - this.width * 2;
 }
 
 function updateScore(enemy) {
