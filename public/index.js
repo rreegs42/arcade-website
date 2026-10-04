@@ -9,13 +9,17 @@ const resetButton = document.querySelector("#reset-button");
 const COOLDOWN_TIME = 5;
 let cooldown = COOLDOWN_TIME;
 let playerScore = 0;
+let playerLives = 3;
 let gameStarted = false;
 
 canvas.width = 450;
 canvas.height = 550;
 
 const background = new Image();
+const heart = new Image();
 background.src = "Sprites/galaxy_background.png";
+heart.src = "Sprites/heart_placeholder.png";
+
 background.onload = function() {
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
@@ -29,6 +33,10 @@ background.onload = function() {
     context.fillText("PRESS START", canvas.width / 2, canvas.height / 2);
     context.strokeText("PRESS START", canvas.width / 2, canvas.height / 2);
 }
+heart.onload = function() {
+    console.log("Heart image loaded.");
+}
+//canvas.style.background = "darkslategrey";
 
 const player = new Player(canvas, 4.5);
 const enemy1 = new Enemy_Bee(canvas, canvas.width/2, canvas.height/2-20, player);
@@ -44,6 +52,15 @@ function game() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
     player.draw(context);
+
+    for (let i = 0; i < playerLives; i++) {
+        context.drawImage(heart, 10 + i * 65, 10, 50, 50);
+    }
+
+    enemies.forEach(enemy => {
+        enemy.draw(context);
+    });
+
 
     window.addEventListener("keydown", (event) => {
         if (event.repeat) return;
@@ -61,15 +78,10 @@ function game() {
             }
         }
     });
-    
 
     if (cooldown > 0){
         cooldown -= 1;
     }
-
-    enemies.forEach(enemy => {
-        enemy.draw(context);
-    });
 
     let bullet_count = 0;
     bullets.forEach(bullet => {
