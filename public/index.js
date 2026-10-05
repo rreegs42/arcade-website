@@ -10,7 +10,10 @@ const COOLDOWN_TIME = 5;
 let cooldown = COOLDOWN_TIME;
 let playerScore = 0;
 let playerLives = 3;
-let gameStarted = false;
+let isGameOver = false;
+let heartCooldown = false;
+const HEART_COOLDOWN = 500;
+let gameInterval = null;
 
 canvas.width = 450;
 canvas.height = 550;
@@ -23,7 +26,7 @@ heart.src = "Sprites/heart_placeholder.png";
 background.onload = function() {
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    context.font = "bold 40px Ariel";
+    context.font = "bold 40px Arial";
     context.fillStyle = "lightslateblue";
     context.strokeStyle = "darkslateblue";
     context.lineWidth = 3;
@@ -49,6 +52,8 @@ enemies.push(enemy1);
 enemies.push(enemy2);
 
 function game() {
+    if (isGameOver) return;
+
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
     player.draw(context);
@@ -105,6 +110,18 @@ function game() {
         }
         bullet_count++
     });
+
+    //Check player and enemy collision
+    enemies.forEach(enemy => {
+        if(is_collision(player, enemy)) {
+            decreaseLives();
+        }
+    });
+
+    
+    if (playerLives === 0) {
+        gameOver();
+    }
 }
 
 //check collisions between rectangles
@@ -120,21 +137,39 @@ function is_collision(obj1, obj2){
 //Prevents window from moving down when spacebar is pressed.
 window.addEventListener('keydown', function(e) {
   if (e.key === ' ' || e.keyCode === 32) {
-    const target = e.target;
-
     e.preventDefault();
   }
 });
 
 startButton.addEventListener('click', (event) => {
-    gameStarted = true;
-    setInterval(game, 1000 / 60);
+    isGameOver = false;
+
+    if (gameInterval === null) {
+        setInterval(game, 1000 / 60);
+    }
 });
 resetButton.addEventListener('click', (event) => {
     resetGame();
 });
 
+function decreaseLives() {
+    if (heartCooldown) {
+        console.log("Heart cooldown.");
+        return;
+    }
+
+    playerLives--;
+    heartCooldown = true;
+
+    setTimeout(() => {
+        heartCooldown = false;
+        console.log("Heart cooldown over.");
+    }, HEART_COOLDOWN);
+}
+
 function resetGame() {
+    isGameOver = false;
+
     bullets = [];
     enemies = [];
 
@@ -148,11 +183,34 @@ function resetGame() {
     cooldown = COOLDOWN_TIME;
 
     playerScore = 0;
+    playerLives = 3;
     const scoreLabel = document.querySelector("#score");
     scoreLabel.textContent = playerScore;
 
     player.x = canvas.width / 2;
-    player.y = this.canvas.height - this.width * 2;
+    player.y = canvas.height - player.height * 2;
+}
+
+function gameOver() {
+    isGameOver = true;
+
+    if (gameInterval != null) {
+        clearInterval(gameInterval);
+        gameInterval = null;
+    }
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+    context.font = "bold 40px Arial";
+    context.fillStyle = "red";
+    context.strokeStyle = "darkred";
+    context.lineWidth = 3;
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+
+    context.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+    context.strokeText("GAME OVER", canvas.width / 2, canvas.height / 2);
 }
 
 function updateScore(enemy) {
