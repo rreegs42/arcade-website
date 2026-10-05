@@ -75,7 +75,7 @@ function game() {
                 const bullet = new Bullet(canvas, 6);
 
                 bullet.x = player.x + player.width / 2 - bullet.width / 2;
-                bullet.y = player.y - bullet.height;
+                bullet.y = player.y + bullet.height;
                 
                 bullets.push(bullet);
                 player.space = false;
@@ -214,7 +214,7 @@ function gameOver() {
 }
 
 function updateScore(enemy) {
-    if (enemy.diving_at_player) {
+    if (!enemy.at_home) {
         playerScore += 20;
     }
     else {
