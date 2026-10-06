@@ -2,6 +2,8 @@ import Player from "./Player.js";
 import Enemy_Bee from "./Enemy_Bee.js";
 import Bullet from "./Bullet.js"
 import enemy_manager from "./enemy_manager.js"
+import enemy_bullet from "./enemy_bullet.js"
+import Enemy_Bullet from "./enemy_bullet.js";
 
 
 
@@ -52,6 +54,7 @@ heart.onload = function() {
 const player = new Player(canvas, 4.5);
 let bullets = [];
 let enemies = [];
+let enemy_bullets = [];
 
 
 const enemy_manager1 = new enemy_manager(canvas, player);
@@ -84,6 +87,25 @@ function game() {
 
     if(temp === true){
         enemy_manager1.spawn_enemy_block();
+        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        delay(1500).then(() => {
+            enemy_manager1.spawn_enemy_block_left();
+        });
+
+        delay(3000).then(() => {
+            enemy_manager1.spawn_enemy_column();
+        });
+
+        delay(4500).then(() => {
+            enemy_manager1.spawn_enemy_column_left();
+        });
+
+        delay(6000).then(() => {
+            enemy_manager1.spawn_enemy_column_center();
+        });
+
+
         temp = false;
         console.log(temp);
     }
@@ -99,8 +121,17 @@ function game() {
     if (enemies.length > 0){
         enemies.forEach(enemy => {
             enemy.draw(context);
+            if(enemy.shooting){
+                enemy.shooting = false;
+                const enemy_bullet_1 = new Enemy_Bullet(canvas, 3);
+                enemy_bullet_1.x = enemy.x;
+                enemy_bullet_1.y = enemy.y;
+                enemy_bullets.push(enemy_bullet_1);
+            }
             //console.log("enemy drawn");
         });
+    } else {
+        temp = true;
     }
 
     if (cooldown > 0){
@@ -131,10 +162,31 @@ function game() {
         bullet_count++
     });
 
+    let enemy_bullet_count = 0;
+    enemy_bullets.forEach(this_enemy_bullet => {
+        if (this_enemy_bullet.y > canvas.height + this_enemy_bullet.width){
+            enemy_bullets.splice(enemy_bullet_count, 1);
+            enemy_bullet_count--;
+            this_enemy_bullet = null;
+        } else {
+            if(is_collision(this_enemy_bullet, player)){
+                enemy_bullets.splice(enemy_bullet_count, 1);
+                enemy_bullet_count--;
+                decreaseLives();
+            }
+            this_enemy_bullet.draw(context);
+        }
+        enemy_bullet_count++;
+    });
+
+    
+
     //Check player and enemy collision
     enemies.forEach(enemy => {
         if(is_collision(player, enemy)) {
-            decreaseLives();
+            if(!enemy.spawning){
+                decreaseLives();
+            }
         }
     });
 

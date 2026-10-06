@@ -6,6 +6,7 @@ export default class Enemy_Bee {
     spawning = true;
     diving_across = false;
     diving_at_player = false;
+    shooting = false;
 
     first_dive = true;
     target_x;
@@ -14,9 +15,10 @@ export default class Enemy_Bee {
     start_x;
     start_y;
 
+    swoop_time;
     default_swoop_time;
 
-    constructor(canvas, home_x, home_y, player, swoop_time, image) {
+    constructor(canvas, home_x, home_y, player, image) {
         
         this.canvas = canvas;
         this.velocity = 2;
@@ -35,8 +37,8 @@ export default class Enemy_Bee {
         this.image = new Image();
         this.image.src = image;
 
-        this.swoop_time = swoop_time;
-        this.default_swoop_time = swoop_time;
+        this.swoop_time = Math.floor(Math.random() * (3000 - 600 + 1)) + 600;
+        this.default_swoop_time = this.swoop_time;
 
     }
 
@@ -95,6 +97,13 @@ export default class Enemy_Bee {
 
     dive_across() {
         this.diving_across = true;
+
+        let rand = Math.floor(Math.random() * 151);
+
+        if(rand === 150){
+            this.shooting = true;
+        }
+
         if(this.x <= 0 || this.x >= this.canvas.width - this.width){
             this.diving_across = false;
             this.dive_at_player();
@@ -135,6 +144,10 @@ export default class Enemy_Bee {
             this.y += this.velocity * 2;
         }
 
+    }
+
+    shoot(){
+        shooting = true;
     }
 
 }
