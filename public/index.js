@@ -19,7 +19,7 @@ let isGameOver = false;
 let heartCooldown = false;
 const HEART_COOLDOWN = 500;
 let pressedStart = false;
-const gameInterval = null;
+let gameInterval = null;
 
 canvas.width = 450;
 canvas.height = 550;
@@ -233,16 +233,13 @@ window.addEventListener('keydown', function(e) {
 });
 
 startButton.addEventListener('click', (event) => {
-    isGameOver = false;
-
-    if (pressedStart === false) {
-        gameInterval = setInterval(game, 1000 / 60);
-    }
-    else {
+    if (gameInterval != null) {
         return;
     }
 
+    isGameOver = false;
     pressedStart = true;
+    gameInterval = setInterval(game, 1000 / 60);
 });
 resetButton.addEventListener('click', (event) => {
     resetGame();
@@ -265,8 +262,13 @@ function decreaseLives() {
 
 function resetGame() {
     isGameOver = true;
+    
+    if (gameInterval !== null) {
+        clearInterval(gameInterval);
+        gameInterval = null;
+    }
+
     pressedStart = false;
-    clearInterval(gameInterval);
 
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
     context.fillText("PRESS START", canvas.width / 2, canvas.height / 2);
