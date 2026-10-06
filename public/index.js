@@ -81,26 +81,9 @@ function game() {
     if (enemies.length > 0){
         enemies.forEach(enemy => {
             enemy.draw(context);
-            console.log("enemy drawn");
+            //console.log("enemy drawn");
         });
     }
-
-    window.addEventListener("keydown", (event) => {
-        if (event.repeat) return;
-
-        if (player.space) {
-            if (cooldown <= 0){
-                const bullet = new Bullet(canvas, 6);
-
-                bullet.x = player.x + player.width / 2 - bullet.width / 2;
-                bullet.y = player.y + bullet.height;
-                
-                bullets.push(bullet);
-                player.space = false;
-                cooldown = COOLDOWN_TIME;
-            }
-        }
-    });
 
     if (cooldown > 0){
         cooldown -= 1;
@@ -142,6 +125,23 @@ function game() {
         gameOver();
     }
 }
+
+window.addEventListener("keydown", (event) => {
+    if (event.repeat) return;
+
+    if (player.space) {
+        if (cooldown <= 0){
+            const bullet = new Bullet(canvas, 6);
+
+            bullet.x = player.x + player.width / 2 - bullet.width / 2;
+            bullet.y = player.y + bullet.height;
+            
+            bullets.push(bullet);
+            player.space = false;
+            cooldown = COOLDOWN_TIME;
+        }
+    }
+});
 
 //check collisions between rectangles
 function is_collision(obj1, obj2){

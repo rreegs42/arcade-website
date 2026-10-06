@@ -15,6 +15,9 @@ export default class Player {
         this.x = this.canvas.width / 2;
         this.y = this.canvas.height - this.width * 2;
 
+        this.image = new Image();
+        this.image.src = "Sprites/galaxy_player.png"
+
         document.addEventListener("keydown", this.keydown);
         document.addEventListener("keyup", this.keyup);
     }
@@ -23,9 +26,7 @@ export default class Player {
         this.move();
         this.collideWalls();
 
-        const playerImage = new Image();
-        playerImage.src = "Sprites/galaxy_player.png";
-        context.drawImage(playerImage, this.x, this.y + 50, this.width, this.height);
+        context.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 
     collideWalls() {

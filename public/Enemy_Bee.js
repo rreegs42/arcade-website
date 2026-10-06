@@ -13,9 +13,10 @@ export default class Enemy_Bee {
 
     start_x;
     start_y;
-    dive_cooldown = Math.floor(Math.random() * (1200 - 600 + 1)) + 600;
 
-    constructor(canvas, home_x, home_y, player, image) {
+    default_swoop_time;
+
+    constructor(canvas, home_x, home_y, player, swoop_time, image) {
         
         this.canvas = canvas;
         this.velocity = 2;
@@ -31,25 +32,27 @@ export default class Enemy_Bee {
         this.x = -this.width;
         this.y = this.canvas.height + this.width;
 
-        this.image = image;
+        this.image = new Image();
+        this.image.src = image;
+
+        this.swoop_time = swoop_time;
+        this.default_swoop_time = swoop_time;
 
     }
 
     draw(context) {
-        console.log("enemy exists");
+        //console.log("enemy exists");
         context.beginPath();
 
-        const enemyImage = new Image();
-        enemyImage.src = this.image;
-        context.drawImage(enemyImage, (this.x), (this.y+this.width), this.width, this.height);
+        context.drawImage(this.image, (this.x), (this.y), this.width, this.height);
 
         if (this.at_home){
             this.checkPos();
             this.move();
-            this.dive_cooldown -= 2;
-            console.log(this.dive_cooldown);
+            this.swoop_time -= 2;
+            console.log(this.swoop_time);
 
-            if (this.dive_cooldown <= 0){
+            if (this.swoop_time <= 0){
                 this.dive_across();
                 this.at_home = false;
             }
@@ -61,7 +64,7 @@ export default class Enemy_Bee {
                 this.y = this.start_y;
                 this.at_home = true;
                 this.spawning = false;
-                this.dive_cooldown = Math.floor(Math.random() * (1200 - 600 + 1)) + 600;
+                this.swoop_time = this.default_swoop_time;
             }
         } else if (this.diving_across) {
             this.dive_across();

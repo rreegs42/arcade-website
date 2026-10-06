@@ -34,15 +34,16 @@ export default class Enemy_Manager {
     spawn_enemy_block(){
         let img = this.choose_image();
 
-        const enemy1 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2-20-(0*30), this.player, img);
-        const enemy2 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (2 * 30), this.canvas.height/2-20-(0*30), this.player, img);
-        const enemy3 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2-20-(0*30), this.player, img);
-        const enemy4 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2-20-(2*30), this.player, img);
-        const enemy5 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (2 * 30), this.canvas.height/2-20-(2*30), this.player, img);
-        const enemy6 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2-20-(2*30), this.player, img);
-        const enemy7 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2-20-(4*30), this.player, img);
-        const enemy8 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (2 * 30), this.canvas.height/2-20-(4*30), this.player, img);
-        const enemy9 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2-20-(4*30), this.player, img);
+
+        const enemy1 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2-20-(0*30), this.player, Math.floor(Math.random() * (3000 - 600 + 1)) + 600,  img);
+        const enemy2 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (2 * 30), this.canvas.height/2-20-(0*30), this.player, Math.floor(Math.random() * (3000 - 600 + 1)) + 600,  img);
+        const enemy3 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2-20-(0*30), this.player, Math.floor(Math.random() * (3000 - 600 + 1)) + 600,  img);
+        const enemy4 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2-20-(2*30), this.player, Math.floor(Math.random() * (3000 - 600 + 1)) + 600,  img);
+        const enemy5 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (2 * 30), this.canvas.height/2-20-(2*30), this.player, Math.floor(Math.random() * (3000 - 600 + 1)) + 600,  img);
+        const enemy6 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2-20-(2*30), this.player, Math.floor(Math.random() * (3000 - 600 + 1)) + 600,  img);
+        const enemy7 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2-20-(4*30), this.player, Math.floor(Math.random() * (3000 - 600 + 1)) + 600,  img);
+        const enemy8 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (2 * 30), this.canvas.height/2-20-(4*30), this.player, Math.floor(Math.random() * (3000 - 600 + 1)) + 600,  img);
+        const enemy9 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2-20-(4*30), this.player, Math.floor(Math.random() * (3000 - 600 + 1)) + 600,  img);
 
         this.this_list.push(enemy1)
         this.this_list.push(enemy2)
