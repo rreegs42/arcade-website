@@ -93,6 +93,7 @@ function game() {
             enemy_manager1.spawn_enemy_block_left();
         });
 
+
         delay(3000).then(() => {
             enemy_manager1.spawn_enemy_column();
         });
@@ -257,17 +258,16 @@ function decreaseLives() {
 }
 
 function resetGame() {
-    isGameOver = false;
+    isGameOver = true;
+
+    context.drawImage(background, 0, 0, canvas.width, canvas.height);
+    context.fillText("PRESS START", canvas.width / 2, canvas.height / 2);
+    context.strokeText("PRESS START", canvas.width / 2, canvas.height / 2);
+    
 
     bullets = [];
     enemies = [];
-
-    enemies.push(
-        new Enemy_Bee(canvas, canvas.width/2, canvas.height/2-20, player)
-    );
-    enemies.push (
-        new Enemy_Bee(canvas, canvas.width/2-120, canvas.height/2-40, player)
-    );
+    enemy_bullets = [];
 
     cooldown = COOLDOWN_TIME;
 
@@ -278,6 +278,8 @@ function resetGame() {
 
     player.x = canvas.width / 2;
     player.y = canvas.height - player.height * 2;
+
+    temp = true;
 }
 
 function gameOver() {
