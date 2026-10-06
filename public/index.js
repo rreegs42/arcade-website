@@ -22,6 +22,11 @@ canvas.width = 450;
 canvas.height = 550;
 
 const background = new Image();
+const background_2 = new Image();
+
+let background_height = 0;
+let background_2_height = -canvas.height;
+
 const heart = new Image();
 background.src = "Sprites/galaxy_background.png";
 heart.src = "Sprites/heart_placeholder.png";
@@ -57,7 +62,20 @@ function game() {
     if (isGameOver) return;
 
     context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(background, 0, 0, canvas.width, canvas.height);
+    context.drawImage(background, 0, background_height, canvas.width, canvas.height);
+    context.drawImage(background, 0, background_2_height, canvas.width, canvas.height);
+
+    background_height += 1;
+    background_2_height +=1;
+
+    if(background_height >= canvas.height){
+        background_height = -canvas.height;
+        background_2_height = 0;
+    } else if (background_2_height >= canvas.height){
+        background_2_height = -canvas.height;
+        background_height = 0;
+    }
+
     player.draw(context);
 
     for (let i = 0; i < playerLives; i++) {

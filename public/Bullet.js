@@ -7,11 +7,13 @@ export default class Bullet {
         this.y = 0;
         this.width = 10;
         this.height = 25;
+
+        this.image = new Image();
+        this.image.src = "Sprites/galaxy_player_bullet.png"
     }
 
     draw(context) {
         this.y -= this.bVelocity;
-        context.fillStyle = "yellow";
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 }
