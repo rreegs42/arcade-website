@@ -1,6 +1,9 @@
 import Player from "./Player.js";
 import Enemy_Bee from "./Enemy_Bee.js";
 import Bullet from "./Bullet.js"
+import enemy_manager from "./enemy_manager.js"
+
+
 
 const canvas = document.getElementById("game");
 const context = canvas.getContext("2d");
@@ -42,14 +45,13 @@ heart.onload = function() {
 //canvas.style.background = "darkslategrey";
 
 const player = new Player(canvas, 4.5);
-const enemy1 = new Enemy_Bee(canvas, canvas.width/2, canvas.height/2-20, player);
-const enemy2 = new Enemy_Bee(canvas, canvas.width/2-120, canvas.height/2-40, player);
-//const enemy3 = new Enemy_Bee(canvas, canvas.width/2+120, canvas.height/2-20);
 let bullets = [];
 let enemies = [];
 
-enemies.push(enemy1);
-enemies.push(enemy2);
+
+const enemy_manager1 = new enemy_manager(canvas, player);
+
+let temp = true;
 
 function game() {
     if (isGameOver) return;
@@ -62,10 +64,26 @@ function game() {
         context.drawImage(heart, 10 + i * 65, 10, 50, 50);
     }
 
-    enemies.forEach(enemy => {
-        enemy.draw(context);
-    });
+    if(temp === true){
+        enemy_manager1.spawn_enemy_block();
+        temp = false;
+        console.log(temp);
+    }
 
+    if(enemy_manager1.this_list.length > 0){
+        enemy_manager1.this_list.forEach(enemy => {
+            enemies.push(enemy);
+        });
+    }
+    
+    enemy_manager1.this_list = [];
+
+    if (enemies.length > 0){
+        enemies.forEach(enemy => {
+            enemy.draw(context);
+            console.log("enemy drawn");
+        });
+    }
 
     window.addEventListener("keydown", (event) => {
         if (event.repeat) return;
@@ -93,6 +111,7 @@ function game() {
         if(bullet.y < -(bullet.height*2)){
             bullets.splice(bullet_count, 1);
             bullet_count--;
+            bullet = null;
         } else {
             let enemy_count = 0;
             enemies.forEach(enemy => {

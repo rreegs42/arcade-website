@@ -15,7 +15,7 @@ export default class Enemy_Bee {
     start_y;
     dive_cooldown = Math.floor(Math.random() * (1200 - 600 + 1)) + 600;
 
-    constructor(canvas, home_x, home_y, player) {
+    constructor(canvas, home_x, home_y, player, image) {
         
         this.canvas = canvas;
         this.velocity = 2;
@@ -31,14 +31,17 @@ export default class Enemy_Bee {
         this.x = -this.width;
         this.y = this.canvas.height + this.width;
 
+        this.image = image;
+
     }
 
     draw(context) {
+        console.log("enemy exists");
         context.beginPath();
 
         const enemyImage = new Image();
-        enemyImage.src = "Sprites/galaxy_bee_0.png";
-        context.drawImage(enemyImage, (this.x + this.width), (this.y + this.height), this.width, this.height);
+        enemyImage.src = this.image;
+        context.drawImage(enemyImage, (this.x), (this.y+this.width), this.width, this.height);
 
         if (this.at_home){
             this.checkPos();
