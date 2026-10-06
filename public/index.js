@@ -97,33 +97,43 @@ function game() {
 
 
         delay(3000).then(() => {
-            enemy_manager1.spawn_enemy_block();
-            enemy_spawn.currentTime = 0;
-            enemy_spawn.play();
-
-            delay(1500).then(() => {
-                enemy_manager1.spawn_enemy_block_left();
+            if(!isGameOver){
+                enemy_manager1.spawn_enemy_block();
                 enemy_spawn.currentTime = 0;
                 enemy_spawn.play();
+            }
+
+            delay(1500).then(() => {
+                if(!isGameOver){
+                    enemy_manager1.spawn_enemy_block_left();
+                    enemy_spawn.currentTime = 0;
+                    enemy_spawn.play();
+                }
             });
 
 
             delay(3000).then(() => {
-                enemy_manager1.spawn_enemy_column();
-                enemy_spawn.currentTime = 0;
-                enemy_spawn.play();
+                if(!isGameOver){
+                    enemy_manager1.spawn_enemy_column();
+                    enemy_spawn.currentTime = 0;
+                    enemy_spawn.play();
+                }
             });
 
             delay(4500).then(() => {
-                enemy_manager1.spawn_enemy_column_left();
-                enemy_spawn.currentTime = 0;
-                enemy_spawn.play();
+                if(!isGameOver){
+                    enemy_manager1.spawn_enemy_column_left();
+                    enemy_spawn.currentTime = 0;
+                    enemy_spawn.play();
+                }
             });
 
             delay(6000).then(() => {
-                enemy_manager1.spawn_enemy_column_center();
-                enemy_spawn.currentTime = 0;
-                enemy_spawn.play();
+                if(!isGameOver){
+                    enemy_manager1.spawn_enemy_column_center();
+                    enemy_spawn.currentTime = 0;
+                    enemy_spawn.play();
+                }
             });
         })
 
@@ -305,9 +315,19 @@ function resetGame() {
     context.fillText("PRESS START", canvas.width / 2, canvas.height / 2);
     context.strokeText("PRESS START", canvas.width / 2, canvas.height / 2);
     
-
-    bullets = [];
+    enemies.forEach(enemy => {
+        enemy = null;
+    });
     enemies = [];
+
+    bullets.forEach(bullet => {
+        bullet = null;
+    });
+    bullets = [];
+
+    enemy_bullets.forEach(enemy_bullet => {
+        enemy_bullet = null;
+    });
     enemy_bullets = [];
 
     cooldown = COOLDOWN_TIME;
