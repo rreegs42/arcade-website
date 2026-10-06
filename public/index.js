@@ -34,6 +34,12 @@ const heart = new Image();
 background.src = "Sprites/galaxy_background.png";
 heart.src = "Sprites/galaxy_player.png"
 
+const shoot_sound = new Audio("Sounds/laserShoot.wav");
+const enemy_spawn = new Audio("Sounds/enemy_spawn.wav");
+const player_hit = new Audio("Sounds/player_hit.wav");
+const player_destroyed = new Audio("Sounds/player_destroyed.wav");
+
+
 background.onload = function() {
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
@@ -87,25 +93,39 @@ function game() {
     }
 
     if(temp === true){
-        enemy_manager1.spawn_enemy_block();
         const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-        delay(1500).then(() => {
-            enemy_manager1.spawn_enemy_block_left();
-        });
 
 
         delay(3000).then(() => {
-            enemy_manager1.spawn_enemy_column();
-        });
+            enemy_manager1.spawn_enemy_block();
+            enemy_spawn.currentTime = 0;
+            enemy_spawn.play();
 
-        delay(4500).then(() => {
-            enemy_manager1.spawn_enemy_column_left();
-        });
+            delay(1500).then(() => {
+                enemy_manager1.spawn_enemy_block_left();
+                enemy_spawn.currentTime = 0;
+                enemy_spawn.play();
+            });
 
-        delay(6000).then(() => {
-            enemy_manager1.spawn_enemy_column_center();
-        });
+
+            delay(3000).then(() => {
+                enemy_manager1.spawn_enemy_column();
+                enemy_spawn.currentTime = 0;
+                enemy_spawn.play();
+            });
+
+            delay(4500).then(() => {
+                enemy_manager1.spawn_enemy_column_left();
+                enemy_spawn.currentTime = 0;
+                enemy_spawn.play();
+            });
+
+            delay(6000).then(() => {
+                enemy_manager1.spawn_enemy_column_center();
+                enemy_spawn.currentTime = 0;
+                enemy_spawn.play();
+            });
+        })
 
 
         temp = false;
@@ -132,9 +152,9 @@ function game() {
             }
             //console.log("enemy drawn");
         });
-    } else {
-        temp = true;
-    }
+    }// else {
+    //    temp = true;
+    //}
 
     if (cooldown > 0){
         cooldown -= 1;
@@ -155,6 +175,9 @@ function game() {
                     enemies.splice(enemy_count, 1);
                     enemy_count--;
                     updateScore(enemy);
+                    if(enemies.length <= 0){
+                        temp = true;
+                    }
                 } else {
                     enemy_count++;
                 }
@@ -194,6 +217,8 @@ function game() {
 
     
     if (playerLives === 0) {
+        player_destroyed.currentTime = 0;
+        player_destroyed.play();
         gameOver();
     }
 }
@@ -211,6 +236,8 @@ window.addEventListener("keydown", (event) => {
             bullets.push(bullet);
             player.space = false;
             cooldown = COOLDOWN_TIME;
+            shoot_sound.currentTime = 0;
+            shoot_sound.play();
         }
     }
 });
@@ -252,6 +279,8 @@ function decreaseLives() {
     }
 
     playerLives--;
+    player_hit.currentTime = 0;
+    player_hit.play();
     heartCooldown = true;
 
     setTimeout(() => {
