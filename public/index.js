@@ -270,6 +270,8 @@ function resetGame() {
 
     pressedStart = false;
 
+    context.fillStyle = "lightslateblue";
+    context.strokeStyle = "darkslateblue";
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
     context.fillText("PRESS START", canvas.width / 2, canvas.height / 2);
     context.strokeText("PRESS START", canvas.width / 2, canvas.height / 2);
