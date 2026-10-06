@@ -18,7 +18,7 @@ let playerLives = 3;
 let isGameOver = false;
 let heartCooldown = false;
 const HEART_COOLDOWN = 500;
-let gameInterval = null;
+let pressedStart = false;
 
 canvas.width = 450;
 canvas.height = 550;
@@ -31,7 +31,7 @@ let background_2_height = -canvas.height;
 
 const heart = new Image();
 background.src = "Sprites/galaxy_background.png";
-heart.src = "Sprites/heart_placeholder.png";
+heart.src = "Sprites/galaxy_player.png"
 
 background.onload = function() {
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -234,9 +234,14 @@ window.addEventListener('keydown', function(e) {
 startButton.addEventListener('click', (event) => {
     isGameOver = false;
 
-    if (gameInterval === null) {
+    if (pressedStart === false) {
         setInterval(game, 1000 / 60);
     }
+    else {
+        return;
+    }
+
+    pressedStart = true;
 });
 resetButton.addEventListener('click', (event) => {
     resetGame();
@@ -259,6 +264,7 @@ function decreaseLives() {
 
 function resetGame() {
     isGameOver = true;
+    pressedStart = false;
 
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
     context.fillText("PRESS START", canvas.width / 2, canvas.height / 2);
@@ -284,11 +290,6 @@ function resetGame() {
 
 function gameOver() {
     isGameOver = true;
-
-    if (gameInterval != null) {
-        clearInterval(gameInterval);
-        gameInterval = null;
-    }
 
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
