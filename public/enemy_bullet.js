@@ -1,4 +1,4 @@
-export default class Bullet {
+export default class Enemy_Bullet {
     constructor (canvas, bVelocity) {
         this.canvas = canvas;
         this.bVelocity = bVelocity;
@@ -13,7 +13,7 @@ export default class Bullet {
     }
 
     draw(context) {
-        this.y -= this.bVelocity;
+        this.y += this.bVelocity;
         context.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 }

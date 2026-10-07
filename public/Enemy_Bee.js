@@ -1,4 +1,9 @@
 import Player from "./Player.js";
+
+const swoop_sound = new Audio("Sounds/swoop.wav");
+const shoot_sound = new Audio("Sounds/enemy_shoot.wav");
+
+
 export default class Enemy_Bee {
     left = true;
 
@@ -6,6 +11,7 @@ export default class Enemy_Bee {
     spawning = true;
     diving_across = false;
     diving_at_player = false;
+    shooting = false;
 
     first_dive = true;
     target_x;
@@ -13,9 +19,11 @@ export default class Enemy_Bee {
 
     start_x;
     start_y;
-    dive_cooldown = Math.floor(Math.random() * (1200 - 600 + 1)) + 600;
 
-    constructor(canvas, home_x, home_y, player) {
+    swoop_time;
+    default_swoop_time;
+
+    constructor(canvas, home_x, home_y, player, image) {
         
         this.canvas = canvas;
         this.velocity = 2;
@@ -31,21 +39,30 @@ export default class Enemy_Bee {
         this.x = -this.width;
         this.y = this.canvas.height + this.width;
 
+        this.image = new Image();
+        this.image.src = image;
+
+        this.swoop_time = Math.floor(Math.random() * (3000 - 600 + 1)) + 600;
+        this.default_swoop_time = this.swoop_time;
+
     }
 
     draw(context) {
+        //console.log("enemy exists");
         context.beginPath();
-        context.fillStyle = "red";
-        context.fillRect(this.x, this.y, this.width, this.height);
+
+        context.drawImage(this.image, (this.x), (this.y), this.width, this.height);
 
         if (this.at_home){
             this.checkPos();
             this.move();
-            this.dive_cooldown -= 2;
-            console.log(this.dive_cooldown);
+            this.swoop_time -= 2;
+            console.log(this.swoop_time);
 
-            if (this.dive_cooldown <= 0){
+            if (this.swoop_time <= 0){
                 this.dive_across();
+                swoop_sound.currentTime = 0;
+                swoop_sound.play();
                 this.at_home = false;
             }
         } else if (this.spawning) {
@@ -56,7 +73,7 @@ export default class Enemy_Bee {
                 this.y = this.start_y;
                 this.at_home = true;
                 this.spawning = false;
-                this.dive_cooldown = Math.floor(Math.random() * (1200 - 600 + 1)) + 600;
+                this.swoop_time = this.default_swoop_time;
             }
         } else if (this.diving_across) {
             this.dive_across();
@@ -87,6 +104,15 @@ export default class Enemy_Bee {
 
     dive_across() {
         this.diving_across = true;
+
+        let rand = Math.floor(Math.random() * 151);
+
+        if(rand === 150){
+            this.shooting = true;
+            shoot_sound.currentTime = 0;
+            shoot_sound.play();
+        }
+
         if(this.x <= 0 || this.x >= this.canvas.width - this.width){
             this.diving_across = false;
             this.dive_at_player();
@@ -128,5 +154,6 @@ export default class Enemy_Bee {
         }
 
     }
+
 
 }
