@@ -1,4 +1,9 @@
 import Player from "./Player.js";
+
+const swoop_sound = new Audio("Sounds/swoop.wav");
+const shoot_sound = new Audio("Sounds/enemy_shoot.wav");
+
+
 export default class Enemy_Bee {
     left = true;
 
@@ -56,6 +61,8 @@ export default class Enemy_Bee {
 
             if (this.swoop_time <= 0){
                 this.dive_across();
+                swoop_sound.currentTime = 0;
+                swoop_sound.play();
                 this.at_home = false;
             }
         } else if (this.spawning) {
@@ -102,6 +109,8 @@ export default class Enemy_Bee {
 
         if(rand === 150){
             this.shooting = true;
+            shoot_sound.currentTime = 0;
+            shoot_sound.play();
         }
 
         if(this.x <= 0 || this.x >= this.canvas.width - this.width){
@@ -146,8 +155,5 @@ export default class Enemy_Bee {
 
     }
 
-    shoot(){
-        shooting = true;
-    }
 
 }

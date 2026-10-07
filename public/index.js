@@ -38,6 +38,7 @@ const shoot_sound = new Audio("Sounds/laserShoot.wav");
 const enemy_spawn = new Audio("Sounds/enemy_spawn.wav");
 const player_hit = new Audio("Sounds/player_hit.wav");
 const player_destroyed = new Audio("Sounds/player_destroyed.wav");
+const next_level = new Audio("Sounds/next_level.wav");
 
 
 background.onload = function() {
@@ -94,6 +95,16 @@ function game() {
 
     if(temp === true){
         const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+
+        next_level.currentTime = 0;
+        next_level.play();
+        delay(1700).then(() => {
+            next_level.currentTime = 0;
+            next_level.play();
+        });
+
+
 
 
         delay(3000).then(() => {
