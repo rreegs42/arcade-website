@@ -111,15 +111,15 @@ function game() {
 
         delay(3000).then(() => {
 
-            if(playerScore >= 300){
+            //if(playerScore >= 300){
                 if(!isGameOver){
                     enemy_manager1.spawn_enemy_block();
                     enemy_spawn.currentTime = 0;
                     enemy_spawn.play();
                 }
-            }
+            //}
 
-            if(playerScore >= 600){
+            if(playerScore >= 300){
                 delay(1500).then(() => {
                     if(!isGameOver){
                         enemy_manager1.spawn_enemy_block_left();
@@ -130,7 +130,7 @@ function game() {
             }
 
 
-            if(playerScore >= 1000){
+            if(playerScore >= 700){
                 delay(3000).then(() => {
                     if(!isGameOver){
                         enemy_manager1.spawn_enemy_column();
