@@ -44,7 +44,7 @@ app.get("/login", (req, res) => {
 });
 
 // Files the login page itself needs must be listed here, or it can't load them.
-const OPEN_PATHS = new Set(["/login.html", "/style.css"]);
+const OPEN_PATHS = new Set(["/login.html", "/style.css", "/login.css"]);
 
 app.use((req, res, next) => {
   if (currentUser(req) || OPEN_PATHS.has(req.path)) return next();
