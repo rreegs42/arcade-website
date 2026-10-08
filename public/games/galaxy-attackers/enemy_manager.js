@@ -1,11 +1,14 @@
 import Enemy_Bee from "./Enemy_Bee.js";
 
+let score;
+
 export default class Enemy_Manager {
 
     constructor(canvas, player){
         this.canvas = canvas;
         this.player = player;
         this.this_list = [];
+        this.score = 0;
     }
 
 
@@ -34,15 +37,15 @@ export default class Enemy_Manager {
     spawn_enemy_block(){
         let img = this.choose_image();
 
-        const enemy1 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2+10-(0*30), this.player, img);
-        const enemy2 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (2 * 30), this.canvas.height/2+10-(0*30), this.player, img);
-        const enemy3 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2+10-(0*30), this.player, img);
-        const enemy4 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2+10-(1*30), this.player, img);
-        const enemy5 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (2 * 30), this.canvas.height/2+10-(1*30), this.player, img);
-        const enemy6 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2+10-(1*30), this.player, img);
-        const enemy7 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2+10-(2*30), this.player, img);
-        const enemy8 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (2 * 30), this.canvas.height/2+10-(2*30), this.player, img);
-        const enemy9 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2+10-(2*30), this.player, img);
+        const enemy1 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2+10-(0*30), this.player, this.score, img);
+        const enemy2 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (2 * 30), this.canvas.height/2+10-(0*30), this.player, this.score, img);
+        const enemy3 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2+10-(0*30), this.player, this.score, img);
+        const enemy4 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2+10-(1*30), this.player, this.score, img);
+        const enemy5 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (2 * 30), this.canvas.height/2+10-(1*30), this.player, this.score, img);
+        const enemy6 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2+10-(1*30), this.player, this.score, img);
+        const enemy7 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2+10-(2*30), this.player, this.score, img);
+        const enemy8 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (2 * 30), this.canvas.height/2+10-(2*30), this.player, this.score, img);
+        const enemy9 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2+10-(2*30), this.player, this.score, img);
 
         this.this_list.push(enemy1)
         this.this_list.push(enemy2)
@@ -58,15 +61,15 @@ export default class Enemy_Manager {
     spawn_enemy_block_left(){
         let img = this.choose_image();
 
-        const enemy1 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (1 * 30), this.canvas.height/2+10-(0*30), this.player, img);
-        const enemy2 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (2 * 30), this.canvas.height/2+10-(0*30), this.player, img);
-        const enemy3 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (3 * 30), this.canvas.height/2+10-(0*30), this.player, img);
-        const enemy4 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (1 * 30), this.canvas.height/2+10-(1*30), this.player, img);
-        const enemy5 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (2 * 30), this.canvas.height/2+10-(1*30), this.player, img);
-        const enemy6 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (3 * 30), this.canvas.height/2+10-(1*30), this.player, img);
-        const enemy7 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (1 * 30), this.canvas.height/2+10-(2*30), this.player, img);
-        const enemy8 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (2 * 30), this.canvas.height/2+10-(2*30), this.player, img);
-        const enemy9 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (3 * 30), this.canvas.height/2+10-(2*30), this.player, img);
+        const enemy1 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (1 * 30), this.canvas.height/2+10-(0*30), this.player, this.score, img);
+        const enemy2 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (2 * 30), this.canvas.height/2+10-(0*30), this.player, this.score, img);
+        const enemy3 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (3 * 30), this.canvas.height/2+10-(0*30), this.player, this.score, img);
+        const enemy4 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (1 * 30), this.canvas.height/2+10-(1*30), this.player, this.score, img);
+        const enemy5 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (2 * 30), this.canvas.height/2+10-(1*30), this.player, this.score, img);
+        const enemy6 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (3 * 30), this.canvas.height/2+10-(1*30), this.player, this.score, img);
+        const enemy7 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (1 * 30), this.canvas.height/2+10-(2*30), this.player, this.score, img);
+        const enemy8 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (2 * 30), this.canvas.height/2+10-(2*30), this.player, this.score, img);
+        const enemy9 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (3 * 30), this.canvas.height/2+10-(2*30), this.player, this.score, img);
 
         this.this_list.push(enemy1)
         this.this_list.push(enemy2)
@@ -82,15 +85,15 @@ export default class Enemy_Manager {
     spawn_enemy_column(){
         let img = this.choose_image();
 
-        const enemy1 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2-80-(0*60), this.player, img);
-        const enemy2 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (4 * 30), this.canvas.height/2-80-(0*60), this.player, img);
-        const enemy3 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (5 * 30), this.canvas.height/2-80-(0*60), this.player, img);
-        const enemy4 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2-80-(1*60), this.player, img);
-        const enemy5 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (4 * 30), this.canvas.height/2-80-(1*60), this.player, img);
-        const enemy6 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (5 * 30), this.canvas.height/2-80-(1*60), this.player, img);
-        const enemy7 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2-80-(2*60), this.player, img);
-        const enemy8 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (4 * 30), this.canvas.height/2-80-(2*60), this.player, img);
-        const enemy9 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (5 * 30), this.canvas.height/2-80-(2*60), this.player, img);
+        const enemy1 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2-80-(0*60), this.player, this.score, img);
+        const enemy2 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (4 * 30), this.canvas.height/2-80-(0*60), this.player, this.score, img);
+        const enemy3 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (5 * 30), this.canvas.height/2-80-(0*60), this.player, this.score, img);
+        const enemy4 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2-80-(1*60), this.player, this.score, img);
+        const enemy5 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (4 * 30), this.canvas.height/2-80-(1*60), this.player, this.score, img);
+        const enemy6 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (5 * 30), this.canvas.height/2-80-(1*60), this.player, this.score, img);
+        const enemy7 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (3 * 30), this.canvas.height/2-80-(2*60), this.player, this.score, img);
+        const enemy8 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (4 * 30), this.canvas.height/2-80-(2*60), this.player, this.score, img);
+        const enemy9 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (5 * 30), this.canvas.height/2-80-(2*60), this.player, this.score, img);
 
         this.this_list.push(enemy1)
         this.this_list.push(enemy2)
@@ -106,15 +109,15 @@ export default class Enemy_Manager {
         spawn_enemy_column_left(){
         let img = this.choose_image();
 
-        const enemy1 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (3 * 30), this.canvas.height/2-80-(0*60),this.player, img);
-        const enemy2 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (4 * 30), this.canvas.height/2-80-(0*60),this.player, img);
-        const enemy3 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (5 * 30), this.canvas.height/2-80-(0*60),this.player, img);
-        const enemy4 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (3 * 30), this.canvas.height/2-80-(1*60),this.player, img);
-        const enemy5 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (4 * 30), this.canvas.height/2-80-(1*60),this.player, img);
-        const enemy6 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (5 * 30), this.canvas.height/2-80-(1*60),this.player, img);
-        const enemy7 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (3 * 30), this.canvas.height/2-80-(2*60),this.player, img);
-        const enemy8 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (4 * 30), this.canvas.height/2-80-(2*60),this.player, img);
-        const enemy9 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (5 * 30), this.canvas.height/2-80-(2*60),this.player, img);
+        const enemy1 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (3 * 30), this.canvas.height/2-80-(0*60),this.player, this.score, img);
+        const enemy2 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (4 * 30), this.canvas.height/2-80-(0*60),this.player, this.score, img);
+        const enemy3 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (5 * 30), this.canvas.height/2-80-(0*60),this.player, this.score, img);
+        const enemy4 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (3 * 30), this.canvas.height/2-80-(1*60),this.player, this.score, img);
+        const enemy5 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (4 * 30), this.canvas.height/2-80-(1*60),this.player, this.score, img);
+        const enemy6 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (5 * 30), this.canvas.height/2-80-(1*60),this.player, this.score, img);
+        const enemy7 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (3 * 30), this.canvas.height/2-80-(2*60),this.player, this.score, img);
+        const enemy8 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (4 * 30), this.canvas.height/2-80-(2*60),this.player, this.score, img);
+        const enemy9 = new Enemy_Bee(this.canvas, this.canvas.width/2 - (5 * 30), this.canvas.height/2-80-(2*60),this.player, this.score, img);
 
         this.this_list.push(enemy1)
         this.this_list.push(enemy2)
@@ -130,15 +133,15 @@ export default class Enemy_Manager {
     spawn_enemy_column_center(){
         let img = this.choose_image();
 
-        const enemy1 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (0 * 30), this.canvas.height/2-80-(0*60), this.player, img);
-        const enemy2 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2-80-(0*60), this.player, img);
-        const enemy3 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (-1 * 30), this.canvas.height/2-80-(0*60), this.player, img);
-        const enemy4 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (0 * 30), this.canvas.height/2-80-(1*60), this.player, img);
-        const enemy5 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2-80-(1*60), this.player, img);
-        const enemy6 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (-1 * 30), this.canvas.height/2-80-(1*60), this.player, img);
-        const enemy7 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (0 * 30), this.canvas.height/2-80-(2*60), this.player, img);
-        const enemy8 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2-80-(2*60), this.player, img);
-        const enemy9 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (-1 * 30), this.canvas.height/2-80-(2*60), this.player, img);
+        const enemy1 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (0 * 30), this.canvas.height/2-80-(0*60), this.player, this.score, img);
+        const enemy2 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2-80-(0*60), this.player, this.score, img);
+        const enemy3 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (-1 * 30), this.canvas.height/2-80-(0*60), this.player,this.score,  img);
+        const enemy4 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (0 * 30), this.canvas.height/2-80-(1*60), this.player, this.score, img);
+        const enemy5 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2-80-(1*60), this.player, this.score, img);
+        const enemy6 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (-1 * 30), this.canvas.height/2-80-(1*60), this.player,this.score,  img);
+        const enemy7 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (0 * 30), this.canvas.height/2-80-(2*60), this.player, this.score, img);
+        const enemy8 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (1 * 30), this.canvas.height/2-80-(2*60), this.player, this.score, img);
+        const enemy9 = new Enemy_Bee(this.canvas, this.canvas.width/2 + (-1 * 30), this.canvas.height/2-80-(2*60), this.player,this.score,  img);
 
         this.this_list.push(enemy1)
         this.this_list.push(enemy2)

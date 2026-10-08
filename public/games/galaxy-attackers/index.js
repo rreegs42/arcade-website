@@ -93,6 +93,8 @@ function game() {
         context.drawImage(heart, 10 + i * 65, 10, 50, 50);
     }
 
+    enemy_manager1.score = playerScore;
+
     if(temp === true){
         const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -108,44 +110,55 @@ function game() {
 
 
         delay(3000).then(() => {
-            if(!isGameOver){
-                enemy_manager1.spawn_enemy_block();
-                enemy_spawn.currentTime = 0;
-                enemy_spawn.play();
+
+            if(playerScore >= 300){
+                if(!isGameOver){
+                    enemy_manager1.spawn_enemy_block();
+                    enemy_spawn.currentTime = 0;
+                    enemy_spawn.play();
+                }
             }
 
-            delay(1500).then(() => {
-                if(!isGameOver){
-                    enemy_manager1.spawn_enemy_block_left();
-                    enemy_spawn.currentTime = 0;
-                    enemy_spawn.play();
-                }
-            });
+            if(playerScore >= 600){
+                delay(1500).then(() => {
+                    if(!isGameOver){
+                        enemy_manager1.spawn_enemy_block_left();
+                        enemy_spawn.currentTime = 0;
+                        enemy_spawn.play();
+                    }
+                });
+            }
 
 
-            delay(3000).then(() => {
-                if(!isGameOver){
-                    enemy_manager1.spawn_enemy_column();
-                    enemy_spawn.currentTime = 0;
-                    enemy_spawn.play();
-                }
-            });
+            if(playerScore >= 1000){
+                delay(3000).then(() => {
+                    if(!isGameOver){
+                        enemy_manager1.spawn_enemy_column();
+                        enemy_spawn.currentTime = 0;
+                        enemy_spawn.play();
+                    }
+                });
+            }
 
-            delay(4500).then(() => {
-                if(!isGameOver){
-                    enemy_manager1.spawn_enemy_column_left();
-                    enemy_spawn.currentTime = 0;
-                    enemy_spawn.play();
-                }
-            });
+            if(playerScore >= 1500){
+                delay(4500).then(() => {
+                    if(!isGameOver){
+                        enemy_manager1.spawn_enemy_column_left();
+                        enemy_spawn.currentTime = 0;
+                        enemy_spawn.play();
+                    }
+                });
+            }
 
-            delay(6000).then(() => {
-                if(!isGameOver){
-                    enemy_manager1.spawn_enemy_column_center();
-                    enemy_spawn.currentTime = 0;
-                    enemy_spawn.play();
-                }
-            });
+            if(playerScore >= 2000){
+                delay(6000).then(() => {
+                    if(!isGameOver){
+                        enemy_manager1.spawn_enemy_column_center();
+                        enemy_spawn.currentTime = 0;
+                        enemy_spawn.play();
+                    }
+                });
+            }
         })
 
 

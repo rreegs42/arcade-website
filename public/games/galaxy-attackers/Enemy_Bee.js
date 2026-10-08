@@ -23,10 +23,9 @@ export default class Enemy_Bee {
     swoop_time;
     default_swoop_time;
 
-    constructor(canvas, home_x, home_y, player, image) {
+    constructor(canvas, home_x, home_y, player, score, image) {
         
         this.canvas = canvas;
-        this.velocity = 2;
 
         this.width = 30;
         this.height = 30;
@@ -43,6 +42,26 @@ export default class Enemy_Bee {
         this.image.src = image;
 
         this.swoop_time = Math.floor(Math.random() * (3000 - 600 + 1)) + 600;
+        this.velocity = 2;
+
+        if(score < 500){
+            this.swoop_time = Math.floor(Math.random() * (3600 - 800 + 1)) + 800;
+            this.velocity = 1.5;
+        } else if(score < 1000){
+            this.swoop_time = Math.floor(Math.random() * (3000 - 600 + 1)) + 600;
+            this.velocity = 2;
+        } else if(score < 2000){
+            this.swoop_time = Math.floor(Math.random() * (2500 - 500 + 1)) + 500;
+            this.velocity = 3;
+        } else if(score < 5000){
+            this.swoop_time = Math.floor(Math.random() * (2000 - 400 + 1)) + 400;
+            this.velocity = 3.5;
+        } else if(score > 5000){
+            this.swoop_time = Math.floor(Math.random() * (1500 - 300 + 1)) + 300;
+            this.velocity = 5;
+        }
+
+
         this.default_swoop_time = this.swoop_time;
 
     }
