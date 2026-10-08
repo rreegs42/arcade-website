@@ -31,14 +31,14 @@ let background_height = 0;
 let background_2_height = -canvas.height;
 
 const heart = new Image();
-background.src = "Sprites/galaxy_background.png";
-heart.src = "Sprites/galaxy_player.png"
+background.src = "sprites/galaxy_background.png";
+heart.src = "sprites/galaxy_player.png"
 
-const shoot_sound = new Audio("Sounds/laserShoot.wav");
-const enemy_spawn = new Audio("Sounds/enemy_spawn.wav");
-const player_hit = new Audio("Sounds/player_hit.wav");
-const player_destroyed = new Audio("Sounds/player_destroyed.wav");
-const next_level = new Audio("Sounds/next_level.wav");
+const shoot_sound = new Audio("sounds/laserShoot.wav");
+const enemy_spawn = new Audio("sounds/enemy_spawn.wav");
+const player_hit = new Audio("sounds/player_hit.wav");
+const player_destroyed = new Audio("sounds/player_destroyed.wav");
+const next_level = new Audio("sounds/next_level.wav");
 
 
 background.onload = function() {
@@ -369,6 +369,9 @@ function gameOver() {
 
     context.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
     context.strokeText("GAME OVER", canvas.width / 2, canvas.height / 2);
+
+    // Tell the page the game ended; /leaderboard.js submits the score.
+    window.dispatchEvent(new CustomEvent("arcade:game-over", { detail: { score: playerScore } }));
 }
 
 function updateScore(enemy) {

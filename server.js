@@ -1,6 +1,8 @@
 import express from "express";
+import session from "express-session";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { stubApi, currentUser } from "./stub-api.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,7 +21,38 @@ const TYPES = {
   ".js": "text/javascript; charset=utf-8",
   ".css": "text/css; charset=utf-8",
   ".mp3": "audio/mpeg",
+  ".wav": "audio/wav",
 };
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(
+  session({
+    // Set SESSION_SECRET on Render; the fallback is only for local testing.
+    secret: process.env.SESSION_SECRET || "dev-only-secret-change-me",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { httpOnly: true, sameSite: "lax" },
+  })
+);
+
+app.use(stubApi);
+
+app.get("/login", (req, res) => {
+  if (currentUser(req)) return res.redirect("/");
+  res.sendFile(path.join(PUBLIC_DIR, "login.html"));
+});
+
+// Files the login page itself needs must be listed here, or it can't load them.
+const OPEN_PATHS = new Set(["/login.html", "/style.css", "/login.css"]);
+
+app.use((req, res, next) => {
+  if (currentUser(req) || OPEN_PATHS.has(req.path)) return next();
+  if (req.path.startsWith("/api/")) {
+    return res.status(401).json({ error: "Not logged in." });
+  }
+  res.redirect("/login");
+});
 
 app.use(
   express.static(PUBLIC_DIR, {
@@ -29,10 +62,6 @@ app.use(
     },
   })
 );
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
 
 // A missing .js/.css/.mp3 should fail loudly as a plain 404, not come back as HTML.
 app.use((req, res) => {

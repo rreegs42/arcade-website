@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galaxy Attackers</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Choose a game · Arcade</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/home.css">
 </head>
-<body>
-    <h1>Galaxy Attackers</h1>
-    <canvas id="game"></canvas>
-    <label id="score">0</label>
+<body class="home-page">
+    <header class="top-bar">
+        <span class="player-tag">PLAYER: <strong id="player-name">...</strong></span>
+        <button type="button" id="logout-button">LOG OUT</button>
+    </header>
 
-    <div id="control-board">
-        <button type="button" id=start-button>Start</button>
-        <button type="button" id="reset-button">Reset</button>
-        <label id="control-text">Shoot: spacebar<br>Move: &nbsp;< > arrowskeys<br>Enemy 10 points<br>Swooping enemy 20 points</label>
-    </div>
+    <h1>ARCADE</h1>
+    <p class="subtitle">SELECT YOUR GAME</p>
 
-    <script type="module" src="index.js"></script>
+    <main>
+        <ul id="game-list" class="game-list" aria-label="Games">
+            <!-- Filled in by home.js from /api/games -->
+        </ul>
+        <p id="home-error" role="alert"></p>
+    </main>
+
+    <script type="module" src="/home.js"></script>
 </body>
 </html>
