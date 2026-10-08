@@ -30,8 +30,9 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+// Temporary: until the game-select page exists, send the home page to the game.
+app.get("/", (req, res) => {
+  res.redirect("/games/galaxy-attackers/");
 });
 
 // A missing .js/.css/.mp3 should fail loudly as a plain 404, not come back as HTML.
