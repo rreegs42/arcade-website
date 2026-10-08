@@ -1,7 +1,7 @@
 import Player from "./Player.js";
 
-const swoop_sound = new Audio("Sounds/swoop.wav");
-const shoot_sound = new Audio("Sounds/enemy_shoot.wav");
+const swoop_sound = new Audio("sounds/swoop.wav");
+const shoot_sound = new Audio("sounds/enemy_shoot.wav");
 
 
 export default class Enemy_Bee {

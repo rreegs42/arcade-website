@@ -58,14 +58,57 @@ export async function refreshLeaderboard() {
     try {
         const scores = await getJson(`/api/scores?game=${encodeURIComponent(gameId)}`);
         renderLeaderboard(scores);
-        status.textContent = "";
+        showStatus("");
     } catch (err) {
         if (err.message !== "Not logged in") {
-            status.textContent = "Couldn't load scores.";
+            showStatus("Couldn't load scores.");
             console.error(err);
         }
     }
 }
+
+function showStatus(text, ok = false) {
+    status.textContent = text;
+    status.classList.toggle("ok", ok);
+}
+
+// Each game fires this when it ends:
+// window.dispatchEvent(new CustomEvent("arcade:game-over", { detail: { score } }))
+let submitting = false;
+
+window.addEventListener("arcade:game-over", async (event) => {
+    const score = Math.floor(Number(event.detail?.score));
+    if (submitting || !Number.isFinite(score)) return;
+
+    if (score <= 0) {
+        showStatus("No points this time. Try again!");
+        return;
+    }
+
+    submitting = true;
+    showStatus("Saving score...", true);
+    try {
+        const result = await getJson("/api/scores", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ game: gameId, score }),
+        });
+        renderLeaderboard(result.scores, result.rank);
+        showStatus(
+            result.rank
+                ? `${score} points! You're #${result.rank}!`
+                : `${score} points saved. Not in the top 10 yet.`,
+            true
+        );
+    } catch (err) {
+        if (err.message !== "Not logged in") {
+            showStatus("Couldn't save your score.");
+            console.error(err);
+        }
+    } finally {
+        submitting = false;
+    }
+});
 
 async function init() {
     try {
