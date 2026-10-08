@@ -1,52 +1,45 @@
-# Final Project
+# Arcade Website - Featuring Galaxy Attackers
 
-GAME LINK: https://arcade-website-h4xy.onrender.com 
+### Live on Render: https://arcade-website-h4xy.onrender.com 
 
-*Due October 9th by 1:59 PM*
+### Demo Video
 
-For your final project, you'll implement a web application that exhibits understanding of the course materials. 
-This project should provide an opportunity to both be creative and to pursue individual research and learning goals.
+## Description
 
-## General description
-Your project should consist of a complete Web application, exhibiting facets of the three main sections of the course material:
+As a group, we worked on a Galaga-inspired, retro-themed game with a leaderboard for the top 9 scores (top 10 is too basic). The player of the game has the choice of creating their own account or playing as a guest. As the game goes on, the enemies get faster, and it becomes harder to progress. When the enemy charges at you, double points are received if you shoot it before it takes your life. You get 3 lives, and once you die, if your score is high enough to be in the top 9, you can see yourself on the leaderboard!
 
-- Static web page content and design. You should have a project that is accessible, easily navigable, and features significant content.
-- Dynamic behavior implemented with JavaScript (TypeScript is also allowed if your group wants to explore it).
-- Server-side programming *using Node.js*. Typically this will take the form of some sort of persistent data (database), authentication, and possibly server-side computation.
-- A video (less than five minutes) where each group member explains some aspect of the project. An easy way to produce this video is for you all the groups members to join a Zoom call that is recorded; each member can share their screen when they discuss the project or one member can "drive" the interface while other members narrate (this second option will probably work better.) The video should be posted on YouTube or some other accessible video hosting service. Make sure your video is less than five minutes, but long enough to successfully  explain your project and show it in action. There is no minimum video length.
+## Additional Info
 
-## Project ideation
-Excellent projects typically serve someone/some group; for this assignment you need to define your users and stakeholders. I encourage you to identify projects that will have impact, either artistically, politically, or in terms of productivity. 
+Once you land on the login page, you can either make a new account by typing in a name and password, log in to an existing user (there is a dummy account for player1 (pass: arcade)), or play as a guest. 
 
-### Deliverables
+After that, you will be presented with games you can play (with our original goal, it is only Galaxy Attackers). Select it, and you will be redirected to the game page. Instructions are at the bottom. Press Start to play. If you want to replay, press Reset.
 
-#### Form Team (due 9/11)
-Students are will work in teams of 3-5 students for the project; teams of two can be approved with the permission of the instructor. Working in teams should help enable you to build a good project in a limited amount of time.  Use the `#project-logistics` channel in Discord to pitch ideas for final projects and/or find fellow team members as needed.
+## Technologies
 
-Teams must be in place by end of day on Friday, September 11th. If you have not identified a team at this point, you will be assigned a team. 
+HTML, CSS, JavaScript: used to build the website, style it, and create the interactive game
 
-#### Proposal (due 9/18 by end of day) 
-Provide an outline of your project direction and the names of associated team members. 
-The outline should have enough detail so that staff can determine if it meets the minimum expectations, or if it goes too far to be reasonable by the deadline. Please include a general description of a project, and list of key technologies/libraries you plan on using (e.g. React, Three.js, Svelte, TypeScript etc.). Two to four paragraphs should provide enough level of detail. Name the file proposal.md and submit a pull request by Friday, September 18th at 11:59 PM (end of day). *Only one pull request is required per team*.
+Canvas API: Used to render the game
 
-You will be given some class time to work on your proposal, but please plan on reserving additional time outside of class as needed. There are no other scheduled checkpoints for your project besides the final submission. 
+Node.js and Express: Create the server and handle the login information
 
-#### Turning in Your Project
-Submit a second PR on the final project repo to turn in your app and code. Again, only one pull request per team.
+MongoDB: Store user account information along with scores for the leaderboard
 
-Deploy your app, in the form of a webpage, to Glitch/Heroku/Digital Ocean or some other service; it is critical that the application functions correctly wherever you post it.
+Cookie Sessions: Maintain the user and guest sessions
 
-The README for your second pull request should contain:
+Bcryptjs: Used for password hashing 
 
-1. A brief description of what you created, and a link to the project itself (two paragraphs of text)
-2. Any additional instructions that might be needed to fully use your project (login information etc.)
-3. An outline of the technologies you used and how you used them.
-4. What challenges you faced in completing the project.
-5. What each group member was responsible for designing / developing.
-6. A link to your project video.
+Render: Used to deploy the project itself
 
-Think of 1,3, and 4 in particular in a similar vein to the design / tech achievements for A1—A4… make a case for why what you did was challenging and why your implementation deserves a grade of 100%.
+## Challenges
 
-## FAQs
+Deploying on Render raised new problems with case-sensitive naming. For example, in Player.js, the sprite being uppercase as "Sprites/galaxy_player.png" caused the robots to not show up in Render, when they did in localhost. Another challenge was testing with MongoDB. Since one member had the database and the .env wasn’t included in GitHub, that meant that in order to test and make changes, members had to make another database for themselves. 
 
-- **Can I use XYZ framework?** You can use any web-based frameworks or tools available, but for your server programming you need to use Node.js. Your client-side scripting language should be either JavaScript or TypeScript. While the course staff is happy to help with frameworks used in the class, we can't guarantee we'll be able to assist you with other frameworks / databases; choose carefully!
+## Responsibilities
+
+**Ella Brown**: Worked on HTML, CSS visuals, button functionality, background sprite, and gameplay (player lives, points, collision, and movement). The game was created with JavaScript and the Canvas API.
+
+**Eris Ropi**: Worked on the user login information and was in charge of the MongoDB database that allowed the leaderboard to remain after the website closes. Used cookie sessions to keep track of the users. Helped with api.js, server.js, and login.html in order to achieve proper logins. 
+
+**Hung Dao**: Designed the login and game select page. Added a leaderboard to the games and connected it to the game. Helped with login by making the website work with a dummy account before actual database work.
+
+**Finn Regan**: Created all of the game sprites (player, enemies with variants, player and enemy bullets, and scrolling background), as well as all audio assets (not heard in the video). Enemy behavior: enemies spawn offscreen, come into their “home state”, then at a random interval, dive across to the other side shooting bullets, then dive at the player, then teleport to the top and return to their home. I created all of the collisions between enemies, players, and their bullets. Created an enemy manager which controls when and where enemies spawn, giving enemy blocks a distinct sprite, as well as making enemies more difficult the higher your score is.
