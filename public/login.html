@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in · Arcade</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- Placeholder login page so step 2 can be tested. Step 3 replaces it. -->
+    <h1>Arcade</h1>
+    <form id="login-form">
+        <label>Username <input name="username" autocomplete="username" required></label>
+        <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
+        <button type="submit">Log in</button>
+        <p id="login-error" role="alert"></p>
+    </form>
+
+    <script>
+        const form = document.getElementById("login-form");
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const res = await fetch("/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(Object.fromEntries(new FormData(form))),
+            });
+            if (res.ok) {
+                window.location.href = "/";
+            } else {
+                const { error } = await res.json();
+                document.getElementById("login-error").textContent = error;
+            }
+        });
+    </script>
+</body>
+</html>
