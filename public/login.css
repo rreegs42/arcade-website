@@ -1,5 +1,3 @@
-/* Login page only. Shared fonts and the black page come from /style.css. */
-
 body.login-page {
     min-height: 100vh;
     justify-content: center;
@@ -11,7 +9,6 @@ body.login-page {
     overflow-x: hidden;
 }
 
-/* Twinkling star field behind everything, drawn with CSS only. */
 .login-page::before {
     content: "";
     position: fixed;
@@ -32,7 +29,7 @@ body.login-page {
 
 @keyframes twinkle {
     from { opacity: 0.4; }
-    to   { opacity: 1; }
+    to { opacity: 1; }
 }
 
 .login-page h1 {
@@ -97,7 +94,6 @@ body.login-page {
     color: #ff6b6b;
 }
 
-/* Same look as the game's Start button. */
 #login-button {
     align-self: center;
     font-family: "Jersey 10", sans-serif;
@@ -111,8 +107,8 @@ body.login-page {
     cursor: pointer;
 }
 
-#login-button:hover   { background-color: royalblue; }
-#login-button:active  { transform: scale(0.95); }
+#login-button:hover { background-color: royalblue; }
+#login-button:active { transform: scale(0.95); }
 #login-button:focus-visible {
     outline: 3px solid gold;
     outline-offset: 4px;

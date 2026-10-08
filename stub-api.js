@@ -18,7 +18,13 @@ import express from "express";
 const DUMMY_USER = { username: "player1", password: "arcade" };
 
 export const GAMES = [
-  { id: "galaxy-attackers", title: "Galaxy Attackers", path: "/games/galaxy-attackers/" },
+  { 
+    id: "galaxy-attackers", 
+    title: "Galaxy Attackers", 
+    path: "/games/galaxy-attackers/",
+    thumbnail: "/games/galaxy-attackers/sprites/galaxy_player.png",
+    blurb: "Blast waves of swooping bees before they dive at you.",
+  },
 ];
 
 const TOP_N = 10;
