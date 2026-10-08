@@ -27,6 +27,8 @@
 
             <button type="submit" id="login-button">START</button>
 
+            <button type="button" id="guest-button">PLAY AS GUEST</button>
+            
             <!-- Remove this hint once the real login replaces the dummy account. -->
             <p class="demo-hint">Demo account: <code>player1</code> / <code>arcade</code></p>
         </form>
@@ -35,6 +37,8 @@
     <script>
         const form = document.getElementById("login-form");
         const button = document.getElementById("login-button");
+        const guestButton = document.getElementById("guest-button");
+
         const errorText = document.getElementById("login-error");
 
         form.addEventListener("submit", async (event) => {
@@ -72,6 +76,19 @@
                 button.disabled = false;
             }
         });
+
+        guestButton.addEventListener("click", async () => {
+            const res = await fetch("/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({guest: true}),
+            });
+            
+            if (res.ok){
+                window.location.href = '/'
+            }
+        });
+
     </script>
 </body>
 </html>

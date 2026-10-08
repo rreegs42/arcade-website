@@ -1,8 +1,9 @@
+import "dotenv/config"
 import express from "express";
-import session from "express-session";
+import cookie from "cookie-session";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { stubApi, currentUser } from "./stub-api.js";
+import { api, connectDb, usersCollection } from "./api.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,32 +27,61 @@ const TYPES = {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  session({
-    // Set SESSION_SECRET on Render; the fallback is only for local testing.
-    secret: process.env.SESSION_SECRET || "dev-only-secret-change-me",
-    resave: false,
-    saveUninitialized: false,
-    cookie: { httpOnly: true, sameSite: "lax" },
-  })
-);
 
-app.use(stubApi);
+app.use( cookie({
+  name: 'session',
+  keys: ['a7f3k9x2mQsda8pL4vN6wZ1bT5yR0dE3sH7', 'j9K2mP5vX8qL1asdnR4wT7yB0dF3sH6cA9z']
+}))
 
-app.get("/login", (req, res) => {
-  if (currentUser(req)) return res.redirect("/");
-  res.sendFile(path.join(PUBLIC_DIR, "login.html"));
+
+app.post( '/login', async (req,res)=> {
+  // express.urlencoded will put your key value pairs 
+  // into an object, where the key is the name of each
+  // form field and the value is whatever the user entered
+  if (req.body.guest){
+    const randomNumber = Math.floor(Math.random() * 1000) + 1
+    const guestUsername = `Guest${randomNumber}`
+    req.session.username = guestUsername
+    req.session.guest = true
+    return res.json({ username: guestUsername})
+  }
+  const {username, password} = req.body
+  
+  // below is *just a simple authentication example* 
+  // for A3, you should check username / password combos in your database
+  const existingUser = await usersCollection.findOne({username})
+
+  if (existingUser == null){
+    await usersCollection.insertOne( {
+      username,
+      password
+    })
+    
+    req.session.username = username
+    req.session.guest = false
+    return res.json({ username })
+
+  }
+  if (existingUser.password == password){
+
+    req.session.username = username
+    req.session.guest = false
+    return res.json({ username })
+  }
+
+  return res.status(401).json({error: "Incorrect password."})
+})
+
+app.post( '/logout', (req,res)=> {
+  req.session = null;
+  res.json({ ok: true})
 });
 
-// Files the login page itself needs must be listed here, or it can't load them.
-const OPEN_PATHS = new Set(["/login.html", "/style.css", "/login.css"]);
 
-app.use((req, res, next) => {
-  if (currentUser(req) || OPEN_PATHS.has(req.path)) return next();
-  if (req.path.startsWith("/api/")) {
-    return res.status(401).json({ error: "Not logged in." });
-  }
-  res.redirect("/login");
+app.use(api);
+
+app.get("/login", (req, res) =>{
+  res.sendFile(path.join(PUBLIC_DIR, "login.html"))
 });
 
 app.use(
@@ -67,6 +97,8 @@ app.use(
 app.use((req, res) => {
   res.status(404).type("text/plain").send(`Not found: ${req.path}`);
 });
+
+await connectDb();
 
 app.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`);
