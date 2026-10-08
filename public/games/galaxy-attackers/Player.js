@@ -16,7 +16,7 @@ export default class Player {
         this.y = this.canvas.height - this.width * 2;
 
         this.image = new Image();
-        this.image.src = "Sprites/galaxy_player.png"
+        this.image.src = "sprites/galaxy_player.png"
 
         document.addEventListener("keydown", this.keydown);
         document.addEventListener("keyup", this.keyup);

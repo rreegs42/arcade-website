@@ -10,21 +10,21 @@ export default class Enemy_Manager {
 
 
     choose_image(){
-        let img = "Sprites/galaxy_bee_0.png";
+        let img = "sprites/galaxy_bee_0.png";
         let num = Math.floor(Math.random() * 4);
 
         switch(num){
             case 0:
-                img = "Sprites/galaxy_bee_0.png";
+                img = "sprites/galaxy_bee_0.png";
                 break;
             case 1:
-                img = "Sprites/galaxy_bee_1.png";
+                img = "sprites/galaxy_bee_1.png";
                 break;
             case 2:
-                img = "Sprites/galaxy_bee_2.png";
+                img = "sprites/galaxy_bee_2.png";
                 break;
             case 3:
-                img = "Sprites/galaxy_bee_3.png";
+                img = "sprites/galaxy_bee_3.png";
                 break;
         }
 
